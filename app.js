@@ -229,9 +229,13 @@ function findPersonDescendants(person, peopleARR) {
 		"grandchildren": []
 	};
 
-	descendants.children = peopleARR.filter((el) => el.parents.length && el.parents.includes(person.id))  
-	console.log(descendants)
-}
+	descendants.children = peopleARR.filter((el) => el.parents.length && el.parents.includes(person.id));
+	console.log(descendants);
+
+	// descendants.grandchildren = peopleARR.filter((el) => el.parents.length && descendants.children.every((pId) => descendants.children.every(pId)));
+	descendants.grandchildren = descendants.children.filter((child) => peopleARR.every((el) => el.parents.includes(child.id)));
+	console.log(descendants);
+}	
 
 function searchByTraits(people) {
 	let selectedCriteria = prompt(
