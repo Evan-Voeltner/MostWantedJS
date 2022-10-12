@@ -204,8 +204,6 @@ function findPersonFamily(person, peopleARR) {
 	parents = parents === "" ? "n/a" : parents;
 	family["Parents"] = parents;
 
-	console.log("Family:", family);
-
 	let siblings = peopleARR
 		.filter(
 			(el) =>
@@ -215,10 +213,14 @@ function findPersonFamily(person, peopleARR) {
 		)
 		.map((el) => `${el.firstName} ${el.lastName}`)
 		.join(", ");
-    siblings = siblings === "" ? "n/a" : siblings;
+	siblings = siblings === "" ? "n/a" : siblings;
 	family["Siblings"] = siblings;
 
-	console.log("Family:", family);
+	let stringFamily = Object.entries(family).map(
+		([key, value]) => `\n${key}: ${value}`
+	);
+
+	return stringFamily;
 }
 
 function findPersonDescendants(person, peopleARR) {}
