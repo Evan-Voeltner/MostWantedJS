@@ -192,8 +192,19 @@ function chars(input) {
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
 function findPersonFamily(person, peopleARR) {
+	let family = {};
+
 	let spouse = peopleARR.filter((el) => el.id === person.currentSpouse);
-	console.log("SPOUSE:", spouse[0]);
+	family["Spouse"] = `${spouse[0].firstName} ${spouse[0].lastName}`;
+
+	let parents = peopleARR
+		.filter((el) => person.parents.includes(el.id))
+		.map((p) => `${p.firstName} ${p.lastName}`)
+		.join(", ");
+	parents = parents === "" ? "n/a" : parents;
+	family["Parents"] = parents;
+
+	console.log("Family:", family);
 }
 
 function findPersonDescendants(person, peopleARR) {}
