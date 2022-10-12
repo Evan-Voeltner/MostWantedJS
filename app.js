@@ -199,6 +199,42 @@ function findPersonDescendants(person, peopleARR){
 
 }
 
-function searchByTraits(person){
+function searchByTraits(people){
+    let selectedCriteria = prompt('What criteria would you like to search by?:\n gender \n DOB (Date of birth) \n height \n weight \n eyeColor \n occupation');
+    let criteriaValue;
+
+    switch(selectedCriteria){
+        
+        case "gender":
+            criteriaValue = prompt('What is your gender?: male/female')
+            break;
+        case "dob":
+            criteriaValue = prompt('What is your date of birth?: m/dd/yyyy')
+            break;
+        case "height":
+            criteriaValue = prompt('What is your height?: #')
+            criteriaValue = Number(criteriaValue)
+            break;
+        case "weight":
+            criteriaValue = prompt('What is your weight?: #')
+            criteriaValue = Number(criteriaValue)
+            break;
+        case "eyeColor":
+            criteriaValue = prompt('What is your eyecolor?: color')
+            break;
+        case "occupation":
+            criteriaValue = prompt('What is your occupation?: occupation')
+            break;
+    }
+
+    let searchedPeople = people.filter(function(element){
+        if(element[selectedCriteria] === criteriaValue ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    })
     
+    return searchedPeople;
 }
