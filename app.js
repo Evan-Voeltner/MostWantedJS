@@ -190,3 +190,15 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+
+function findPersonFamily(person, peopleARR){
+
+}
+
+function findPersonDescendants(person, peopleARR){
+
+}
+
+function searchByTraits(person){
+    
+}
