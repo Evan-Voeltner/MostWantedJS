@@ -205,6 +205,20 @@ function findPersonFamily(person, peopleARR) {
 	family["Parents"] = parents;
 
 	console.log("Family:", family);
+
+	let siblings = peopleARR
+		.filter(
+			(el) =>
+				el.id !== person.id &&
+				el.parents.length === person.parents.length &&
+				el.parents.every((parentId) => person.parents.includes(parentId))
+		)
+		.map((el) => `${el.firstName} ${el.lastName}`)
+		.join(", ");
+    siblings = siblings === "" ? "n/a" : siblings;
+	family["Siblings"] = siblings;
+
+	console.log("Family:", family);
 }
 
 function findPersonDescendants(person, peopleARR) {}
