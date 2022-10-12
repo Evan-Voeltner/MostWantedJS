@@ -223,7 +223,15 @@ function findPersonFamily(person, peopleARR) {
 	return stringFamily;
 }
 
-function findPersonDescendants(person, peopleARR) {}
+function findPersonDescendants(person, peopleARR) {
+	let descendants = {
+		"children": [],
+		"grandchildren": []
+	};
+
+	descendants.children = peopleARR.filter((el) => el.parents.length && el.parents.includes(person.id))  
+	console.log(descendants)
+}
 
 function searchByTraits(people) {
 	let selectedCriteria = prompt(
