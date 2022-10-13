@@ -249,6 +249,7 @@ function findPersonDescendants(person, peopleARR) {
 }
 
 function searchByTraits(people) {
+	let searchResults = people;
 	let searchMap = {};
 	let continueFlag = true;
 
@@ -270,7 +271,6 @@ function searchByTraits(people) {
 		}
 	}
 
-	let searchResults = people;
 	Object.entries(searchMap).map(([key, value]) => {
 		let tempArray = [];
 		searchResults.map((el) => {
@@ -281,20 +281,10 @@ function searchByTraits(people) {
 		searchResults = tempArray;
 	});
 
-	console.log("SearchResults:", searchResults);
-
-	let searchedPeople = people.filter(function (element) {
-		if (element[selectedCriteria] === criteriaValue) {
-			return true;
-		} else {
-			return false;
-		}
-	});
-
-	if (searchedPeople.length > 1) {
+	if (searchResults.length > 1) {
 		let selectedPerson = prompt(
 			"Select a person:\n" +
-				searchedPeople
+				searchResults
 					.map(function (person) {
 						return `${person.firstName} ${person.lastName}`;
 					})
@@ -302,7 +292,7 @@ function searchByTraits(people) {
 		);
 		let selectedPersonARR = selectedPerson.split(" ");
 
-		var selectedPersonObject = searchedPeople.filter(function (element) {
+		var selectedPersonObject = searchResults.filter(function (element) {
 			if (
 				element.firstName === selectedPersonARR[0] &&
 				element.lastName === selectedPersonARR[1]
@@ -315,7 +305,7 @@ function searchByTraits(people) {
 
 		return selectedPersonObject;
 	} else {
-		return searchedPeople;
+		return searchResults;
 	}
 }
 
