@@ -316,7 +316,7 @@ function searchByTraitQuestions() {
 
   while (criteriaSelected !== true) {
     selectedCriteria = prompt(
-      "What criteria would you like to search by?:\n gender \n DOB (Date of birth) \n height \n weight \n eyeColor \n occupation"
+      "What criteria would you like to search by?:\n gender \n dob (Date of birth) \n height \n weight \n eyeColor \n occupation"
     );
 
     switch (selectedCriteria) {
