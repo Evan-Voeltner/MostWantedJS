@@ -239,11 +239,13 @@ function findPersonDescendants(person, peopleARR) {
     });
   });
   
-  let stringFamily = Object.entries(descendants).map(
-    ([key, value]) => {`\n${key}: ${value}`}
-  );
+  let stringDescendants = Object.entries(descendants).map(([key, value]) => {
+	return `\n${key}: ${value
+		.map((el) => `\n\t${el.firstName} ${el.lastName}`)
+		.join(', ')}`;
+});
   console.log(descendants);
-  return stringFamily;
+  return stringDescendants;
 }
 
 function searchByTraits(people) {
