@@ -295,7 +295,7 @@ function searchByTraits(people) {
             })
             .join("\n")
       );
-      if (Number(selectedPerson) <= searchResults.length) {
+      if (Number(selectedPerson) <= searchResults.length && 0 < Number(selectedPerson)) {
         personIsSelected = true;
 		break;
       } else {
