@@ -208,6 +208,7 @@ function findPersonFamily(person, peopleARR) {
     .filter(
       (el) =>
         el.id !== person.id &&
+		person.parents.length > 0 &&
         el.parents.length === person.parents.length &&
         el.parents.every((parentId) => person.parents.includes(parentId))
     )
