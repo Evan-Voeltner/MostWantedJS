@@ -270,16 +270,15 @@ function searchByTraits(people) {
 		}
 	}
 
-	// let searchResults = people.filter((el) => {});
-
 	let searchResults = people;
 	Object.entries(searchMap).map(([key, value]) => {
-		temp = [];
-		temp = searchResults.map((el) => {
+		let tempArray = [];
+		searchResults.map((el) => {
 			if (el[key] === value) {
-				temp.push(el);
+				tempArray.push(el);
 			}
 		});
+		searchResults = tempArray;
 	});
 
 	console.log("SearchResults:", searchResults);
