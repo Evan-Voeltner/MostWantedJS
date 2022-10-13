@@ -224,17 +224,6 @@ function findPersonFamily(person, peopleARR) {
 }
 
 function findPersonDescendants(person, peopleARR) {
-  // let descendants = {
-  // 	"children": [],
-  // 	"grandchildren": []
-  // };
-
-  // descendants.children = peopleARR.filter((el) => el.parents.length && el.parents.includes(person.id));
-  // console.log(descendants);
-
-  // descendants.grandchildren = descendants.children.filter((child) => peopleARR.map((el) => el.parents.includes(child.id)));
-
-  // console.log(descendants);
   let descendants = {
     children: [],
     grandchildren: [],
@@ -242,15 +231,19 @@ function findPersonDescendants(person, peopleARR) {
   descendants.children = peopleARR.filter(
     (el) => el.parents.length && el.parents.includes(person.id)
   );
-  descendants.grandchildren = descendants.children.filter((child) => {
-    console.log("Child:", child.firstName);
+   descendants.children.filter((child) => {
     peopleARR.map((el) => {
       if (el.parents.includes(child.id)) {
-        console.log("Grandchild:", el.firstName);
+		descendants.grandchildren.push(el);
       }
     });
   });
+  
+  let stringFamily = Object.entries(descendants).map(
+    ([key, value]) => {`\n${key}: ${value}`}
+  );
   console.log(descendants);
+  return stringFamily;
 }
 
 function searchByTraits(people) {
@@ -317,3 +310,4 @@ function searchByTraits(people) {
     return searchedPeople;
   }
 }
+
