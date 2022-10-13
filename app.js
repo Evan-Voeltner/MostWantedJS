@@ -283,28 +283,27 @@ function searchByTraits(people) {
   });
 
   if (searchResults.length > 1) {
-    let selectedPerson = prompt(
-      "Select a person:\n" +
-        searchResults
-          .map(function (person) {
-            return `${person.firstName} ${person.lastName}`;
-          })
-          .join("\n")
-    );
-    let selectedPersonARR = selectedPerson.split(" ");
-
-    var selectedPersonObject = searchResults.filter(function (element) {
-      if (
-        element.firstName === selectedPersonARR[0] &&
-        element.lastName === selectedPersonARR[1]
-      ) {
-        return true;
+    let selectedPerson;
+    let person;
+    let personIsSelected = false;
+    while (personIsSelected !== true) {
+      selectedPerson = prompt(
+        "Select a person:\n" +
+          searchResults
+            .map((person, index) => {
+              return `(${index + 1}) ${person.firstName} ${person.lastName}`;
+            })
+            .join("\n")
+      );
+      if (Number(selectedPerson) <= searchResults.length) {
+        personIsSelected = true;
+		break;
       } else {
-        return false;
-      }
-    });
-
-    return selectedPersonObject;
+        alert("Please input a number.");
+      };
+    }
+    person = searchResults[selectedPerson - 1];
+    return [person];
   } else {
     return searchResults;
   }
