@@ -208,7 +208,7 @@ function findPersonFamily(person, peopleARR) {
     .filter(
       (el) =>
         el.id !== person.id &&
-		person.parents.length > 0 &&
+        person.parents.length > 0 &&
         el.parents.length === person.parents.length &&
         el.parents.every((parentId) => person.parents.includes(parentId))
     )
@@ -322,11 +322,17 @@ function searchByTraitQuestions() {
 
     switch (selectedCriteria) {
       case "gender":
-        criteriaValue = prompt("What is your gender?: male/female");
+        criteriaValue = promptFor(
+          "What is your gender?: male/female",
+          validateGender
+        );
         criteriaSelected = true;
         break;
       case "dob":
-        criteriaValue = prompt("What is your date of birth?: m/dd/yyyy");
+        criteriaValue = promptFor(
+          "What is your date of birth?: m/dd/yyyy",
+          validateDateOfBirth
+        );
         criteriaSelected = true;
         break;
       case "height":
@@ -356,4 +362,16 @@ function searchByTraitQuestions() {
   return {
     [selectedCriteria]: criteriaValue,
   };
+}
+
+function validateGender(input) {
+  let values = ["male", "female"];
+  input.toLowerCase();
+
+  return values.includes(input);
+}
+
+function validateDateOfBirth(input) {
+  let regexDOB = /^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})$/;
+  return regexDOB.test(input);
 }
