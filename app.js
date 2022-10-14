@@ -80,7 +80,7 @@ function mainMenu(person, people) {
 			// HINT: Review recursion lecture + demo for bonus user story
 			//   let personDescendants = findPersonDescendants(person[0], people);
 			let personDescendants = findDescendantsRecursive(person[0], people);
-			alert(personDescendants);
+			alert(stringifyDescendants(personDescendants));
 			break;
 		case "restart":
 			// Restart app() from the very beginning
@@ -393,4 +393,11 @@ function validateGender(input) {
 function validateDateOfBirth(input) {
 	let regexDOB = /^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})$/;
 	return regexDOB.test(input);
+}
+
+function stringifyDescendants(descendants){
+	let stringDescendants = Object.entries(descendants).map(([key, value]) => {
+		return `\n${value.firstName} ${value.lastName}`;
+	});
+	return stringDescendants;
 }
