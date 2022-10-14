@@ -346,7 +346,7 @@ function searchByTraitQuestions() {
 
   while (criteriaSelected !== true) {
     selectedCriteria = prompt(
-      "What criteria would you like to search by?:\n gender \n dob (Date of birth) \n height \n weight \n eyeColor \n occupation"
+      "What criteria would you like to search by?:\n gender \n dob (Date of birth) \n age \n height \n weight \n eyeColor \n occupation"
     );
 
     switch (selectedCriteria) {
@@ -397,8 +397,22 @@ function searchByTraitQuestions() {
   };
 }
 
-function calculateAge(dateOfBirth) {
-	
+function calculateAge(dob) {
+  let presentDate = new Date();
+  let dateOfBirth = new Date(dob);
+
+  let age = presentDate.getFullYear() - dateOfBirth.getFullYear();
+
+  if (presentDate.getMonth() >= dateOfBirth.getMonth()) {
+    return age;
+  } else if (
+    presentDate.getMonth() === dateOfBirth.getMonth() &&
+    presentDate.getDate() >= dateOfBirth.getDate()
+  ) {
+    return age;
+  } else {
+    return age--;
+  }
 }
 
 function validateGender(input) {
