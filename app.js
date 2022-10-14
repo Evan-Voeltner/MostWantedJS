@@ -251,18 +251,19 @@ function findPersonDescendants(person, peopleARR) {
 }
 
 function findDescendantsRecursive(person, peopleArr, descendants = []) {
-	// person.id (joy)
-	// loop peoplearray => parents.array joy.id
-	// if yes -> recurese
+	descendants = peopleArr.filter((el) => el.parents.includes(person.id));
 
-	peopleArr.map((el) => {
-		if (el.parents.includes(person.id)) {
-			descendants.push(el);
-			findDescendantsRecursive(el, peopleArr, descendants);
-		}
-	});
+	if (descendants.length === 0) {
+		return descendants;
+	} else {
+		descendants.forEach((el) => {
+			descendants = descendants.concat(
+				findDescendantsRecursive(el, peopleArr, descendants)
+			);
+		});
+	}
 
-	// console.log("Recursion test:", descendants);
+	return descendants;
 }
 
 function searchByTraits(people) {
