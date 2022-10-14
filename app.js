@@ -196,7 +196,9 @@ function findPersonFamily(person, peopleARR) {
   let family = {};
 
   let spouse = peopleARR.filter((el) => el.id === person.currentSpouse);
-  family["Spouse"] = `${spouse[0].firstName} ${spouse[0].lastName}`;
+  spouse.length
+    ? (family["Spouse"] = `${spouse[0].firstName} ${spouse[0].lastName}`)
+    : (family["Spouse"] = "n/a");
 
   let parents = peopleARR
     .filter((el) => person.parents.includes(el.id))
@@ -225,30 +227,30 @@ function findPersonFamily(person, peopleARR) {
   return stringFamily;
 }
 
-function findPersonDescendants(person, peopleARR) {
-  let descendants = {
-    children: [],
-    grandchildren: [],
-  };
-  descendants.children = peopleARR.filter(
-    (el) => el.parents.length && el.parents.includes(person.id)
-  );
-  descendants.children.filter((child) => {
-    peopleARR.map((el) => {
-      if (el.parents.includes(child.id)) {
-        descendants.grandchildren.push(el);
-      }
-    });
-  });
+// Non Recursive version of the findDescendantsRecursive() function
+// function findPersonDescendants(person, peopleARR) {
+//   let descendants = {
+//     children: [],
+//     grandchildren: [],
+//   };
+//   descendants.children = peopleARR.filter(
+//     (el) => el.parents.length && el.parents.includes(person.id)
+//   );
+//   descendants.children.filter((child) => {
+//     peopleARR.map((el) => {
+//       if (el.parents.includes(child.id)) {
+//         descendants.grandchildren.push(el);
+//       }
+//     });
+//   });
 
-  let stringDescendants = Object.entries(descendants).map(([key, value]) => {
-    return `\n${key}: ${value
-      .map((el) => `\n\t${el.firstName} ${el.lastName}`)
-      .join(", ")}`;
-  });
-  console.log(descendants);
-  return stringDescendants;
-}
+//   let stringDescendants = Object.entries(descendants).map(([key, value]) => {
+//     return `\n${key}: ${value
+//       .map((el) => `\n\t${el.firstName} ${el.lastName}`)
+//       .join(", ")}`;
+//   });
+//   return stringDescendants;
+// }
 
 function findDescendantsRecursive(person, peopleArr, descendants = []) {
   descendants = peopleArr.filter((el) => el.parents.includes(person.id));
@@ -275,7 +277,6 @@ function searchByTraits(people) {
     let searchResponse = searchByTraitQuestions();
     searchMap = Object.assign(searchMap, searchResponse);
     let count = Object.entries(searchMap).length;
-    console.log(searchResponse, searchMap, count);
 
     if (count >= 5) {
       continueFlag = false;
@@ -396,8 +397,12 @@ function validateDateOfBirth(input) {
 }
 
 function stringifyDescendants(descendants) {
-  let stringDescendants = Object.entries(descendants).map(([key, value]) => {
-    return `\n${value.firstName} ${value.lastName}`;
-  });
-  return stringDescendants;
+  let stringDescendants;
+  if (descendants.length) {
+    stringDescendants = Object.entries(descendants).map(([key, value]) => {
+      return `\n${value.firstName} ${value.lastName}`;
+    });
+    return stringDescendants;
+  }
+  return "No Descendants";
 }
